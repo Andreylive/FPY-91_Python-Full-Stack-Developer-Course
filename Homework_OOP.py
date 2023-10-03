@@ -21,7 +21,23 @@ class Mentor:
                 student.grades[course] = [grade]
         else:
             return 'Ошибка'
- 
+class Lecturer(Mentor):
+    pass
+
+class Reviewer(Mentor):
+    pass
+    
+mentor_1 = Mentor('Andrei', 'Pshenichnyi')
+print(mentor_1.name)
+
+lecturer_1 = Lecturer('Vasya', 'Ivanov')
+print(lecturer_1.name)
+
+Reviewer_1 = Reviewer('Oleg', 'Petrov')
+print(Reviewer_1.name)
+
+
+
 best_student = Student('Ruoy', 'Eman', 'your_gender')
 best_student.courses_in_progress += ['Python']
  
