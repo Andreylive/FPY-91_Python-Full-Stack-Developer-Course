@@ -6,12 +6,23 @@ class Student:
         self.finished_courses = []
         self.courses_in_progress = []
         self.grades = {}
+
+    def rate_hw(self, lecturer, course, grade):
+        if isinstance(lecturer, Lecturer) and course in self.finished_courses and course in lecturer.courses_attached:
+            if course in lecturer.grades:
+                lecturer.grades[course] += [grade]
+            else:
+                lecturer.grades[course] = [grade]
+        else:
+            return 'Ошибка'
+
         
 class Mentor:
     def __init__(self, name, surname):
         self.name = name
         self.surname = surname
         self.courses_attached = []
+        self.grades = {}
         
 class Lecturer(Mentor):
     pass
@@ -39,7 +50,7 @@ Reviewer_1 = Reviewer('Oleg', 'Petrov')
 print(Reviewer_1.name)
 
 
-# Task 2.1 Check behaviour of reviewer calss
+# Task 2.1 Check behaviour of Reviewer calss
 
 best_student = Student('Ruoy', 'Eman', 'your_gender')
 best_student.courses_in_progress += ['Python']
@@ -49,3 +60,14 @@ cool_reviewer.courses_attached += ['Python']
 cool_reviewer.rate_hw(best_student, 'Python', 10)
 
 print(best_student.grades)
+
+# Task 2.2 Check behaviour of Student calss
+
+best_student.finished_courses += ['Physics']
+
+best_lecturer = Lecturer('Albert', 'Einstein')
+best_lecturer.courses_attached += ['Physics']
+
+best_student.rate_hw(best_lecturer, 'Physics', 10)
+
+print(best_lecturer.grades)
