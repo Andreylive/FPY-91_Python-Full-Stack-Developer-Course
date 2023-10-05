@@ -36,10 +36,12 @@ class Reviewer(Mentor):
                     student.grades[course] = [grade]
             else:
                 return 'Ошибка'
+        
+        def __str__(self):
+            return f" Reviewer - {self.name} {self.surname}"
 
-    
+
 # Task 1. Create basic objects to check code
-
 mentor_1 = Mentor('Andrei', 'Pshenichnyi')
 print(mentor_1.name)
 
@@ -50,8 +52,7 @@ Reviewer_1 = Reviewer('Oleg', 'Petrov')
 print(Reviewer_1.name)
 
 
-# Task 2.1 Check behaviour of Reviewer calss
-
+# Task 2.1. Check behaviour of Reviewer calss
 best_student = Student('Ruoy', 'Eman', 'your_gender')
 best_student.courses_in_progress += ['Python']
 
@@ -62,7 +63,6 @@ cool_reviewer.rate_hw(best_student, 'Python', 10)
 print(best_student.grades)
 
 # Task 2.2 Check behaviour of Student calss
-
 best_student.finished_courses += ['Physics']
 
 best_lecturer = Lecturer('Albert', 'Einstein')
@@ -71,3 +71,6 @@ best_lecturer.courses_attached += ['Physics']
 best_student.rate_hw(best_lecturer, 'Physics', 10)
 
 print(best_lecturer.grades)
+
+# Task 3. Check chenged pring function
+print(cool_reviewer)
