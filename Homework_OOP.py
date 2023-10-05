@@ -16,6 +16,8 @@ class Student:
         else:
             return 'Ошибка'
 
+    def __str__(self):
+        return f" Имя: {self.name}\n Фамилия: {self.surname}\n Средняя оценка за домашние задания: {self.grades}\n Курсы в процессе изучения: {self.courses_in_progress}\n Завершенные курсы: {self.finished_courses}"
         
 class Mentor:
     def __init__(self, name, surname):
@@ -41,36 +43,31 @@ class Reviewer(Mentor):
             return f" Reviewer - {self.name} {self.surname}"
 
 
-# Task 1. Create basic objects to check code
-mentor_1 = Mentor('Andrei', 'Pshenichnyi')
-print(mentor_1.name)
-
-lecturer_1 = Lecturer('Vasya', 'Ivanov')
-print(lecturer_1.name)
-
-Reviewer_1 = Reviewer('Oleg', 'Petrov')
-print(Reviewer_1.name)
-
-
-# Task 2.1. Check behaviour of Reviewer calss
+# Create students and their sets of courses
 best_student = Student('Ruoy', 'Eman', 'your_gender')
 best_student.courses_in_progress += ['Python']
+best_student.courses_in_progress += ['SQL'] 
+best_student.courses_in_progress += ['Advanced Python']
+best_student.finished_courses += ['Physics']
+best_student.finished_courses += ['GIT']
+print(best_student.courses_in_progress)
+print(best_student.finished_courses)
 
+# Create a reviewers and their courses and ratings
 cool_reviewer = Reviewer('Ivan', 'Mulin')
 cool_reviewer.courses_attached += ['Python']
+cool_reviewer.courses_attached += ['SQL']
+cool_reviewer.courses_attached += ['Advanced Python']
 cool_reviewer.rate_hw(best_student, 'Python', 10)
-
+cool_reviewer.rate_hw(best_student, 'SQL', 5)
+print(cool_reviewer.courses_attached)
 print(best_student.grades)
 
-# Task 2.2 Check behaviour of Student calss
-best_student.finished_courses += ['Physics']
-
+# Create a lecturer and her courses and thier raiting
 best_lecturer = Lecturer('Albert', 'Einstein')
 best_lecturer.courses_attached += ['Physics']
-
 best_student.rate_hw(best_lecturer, 'Physics', 10)
-
+print(best_lecturer.courses_attached)
 print(best_lecturer.grades)
 
-# Task 3. Check chenged pring function
-print(cool_reviewer)
+# Change pring func behaviour
