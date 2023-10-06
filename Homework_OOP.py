@@ -12,9 +12,9 @@ class Student:
     def rate_hw(self, lecturer, course, grade):
         if isinstance(lecturer, Lecturer) and course in self.finished_courses and course in lecturer.courses_attached:
             if course in lecturer.grades:
-                lecturer.grades[course] += grade
+                lecturer.grades[course] += [grade]
             else:
-                lecturer.grades[course] = grade
+                lecturer.grades[course] = [grade]
         else:
             return 'Ошибка'
         
@@ -97,7 +97,7 @@ class Lecturer(Mentor):
     def __str__(self):
      return (f"Имя: {self.name}\n"
              f"Фамилия: {self.surname}\n"
-             F"Средняя оценка за лекции: {mean(list(self.grades.values()))}\n"
+             F"Средняя оценка за лекции: {mean([mean(i) for i in list(self.grades.values())])}\n"
     )
 
 class Reviewer(Mentor):
@@ -112,9 +112,6 @@ class Reviewer(Mentor):
         
         def __str__(self):
             return f"Имя: {self.name}\nФамилия: {self.surname}"
-
-class Course:
-    pass
 
 
 # Create students and their sets of courses
@@ -144,7 +141,7 @@ cool_reviewer.courses_attached += ['Python']
 cool_reviewer.courses_attached += ['SQL']
 cool_reviewer.courses_attached += ['Advanced Python']
 
-# Rate fist student by reviewer
+# Rate first student by reviewer
 cool_reviewer.rate_hw(best_student, 'Python', 10)
 cool_reviewer.rate_hw(best_student, 'SQL', 5)
 print(cool_reviewer.courses_attached)
@@ -161,18 +158,30 @@ best_lecturer = Lecturer('Albert', 'Einstein')
 best_lecturer.courses_attached += ['Physics']
 best_lecturer.courses_attached += ['GIT']
 
-# Rate lecturer by students
+best_lecturer_2 = Lecturer('Isaac', 'Newton')
+best_lecturer_2.courses_attached += ['Physics']
+best_lecturer_2.courses_attached += ['GIT']
+
+# Rate lecturers by students
+
+# Rate lecturer 1 by 2 studets
 best_student.rate_hw(best_lecturer, 'Physics', 10)
 best_student.rate_hw(best_lecturer, 'GIT', 2)
 best_student_2.rate_hw(best_lecturer, 'Physics', 5)
 best_student_2.rate_hw(best_lecturer, 'GIT', 5)
-
-print(best_lecturer.courses_attached)
 print(best_lecturer.grades)
 
-#  Check changed print func behaviour
+# Rate lecturer 2 by 2 studets
+best_student.rate_hw(best_lecturer_2, 'Physics', 10)
+best_student.rate_hw(best_lecturer_2, 'GIT', 9)
+best_student_2.rate_hw(best_lecturer_2, 'Physics', 9)
+best_student_2.rate_hw(best_lecturer_2, 'GIT', 9)
+print(best_lecturer_2.grades)
+
+# #  Check changed print func behaviour
 print(best_student)
 print(cool_reviewer)
+print(best_lecturer.grades)
 print(best_lecturer)
 
 # Compare students on average scores
@@ -181,5 +190,20 @@ best_student > best_student_2
 best_student == best_student_2
 best_student != best_student_2
 
-# 
+# Course mean rating function
+def mean_course_score(student_list, course):
+    scores_list = []
+    for student in student_list:
+        if course in student.grades:
+            scores_list.append(student.grades[course])
+    print(f"Средняя оценка по курс {course} = {mean(scores_list)}")    
+    return mean(scores_list)       
+
+student_list = [best_student, best_student_2]
+mean_course_score(student_list, 'Python')
+
+# Lectures mean rating function
+
+
+
 
