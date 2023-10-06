@@ -17,6 +17,9 @@ class Student:
                 lecturer.grades[course] = grade
         else:
             return 'Ошибка'
+        
+    def mean_score(self):
+        return mean(list(self.grades.values()))
 
     def __str__(self):
         return (f"Имя: {self.name}\n"
@@ -25,7 +28,63 @@ class Student:
                 f"Rурсы в процессе изучения: {', '.join(self.courses_in_progress)}\n"
                 F"Завершенные курсы: {', '.join(self.finished_courses)}"
         )
+    
+    def __gt__(self, other):
+        mean_score_1 = self.mean_score()
+        mean_score_2 = other.mean_score()
+        if mean_score_1 > mean_score_2:
+            print(True)
+            print(f"Средняя оценка {self.name} {self.surname} равна {mean_score_1}")
+            print(f"Средняя оценка {other.name} {other.surname} равна {mean_score_2}")
+            return True
+        elif mean_score_1 < mean_score_2:
+            print(False)
+            print(f"Средняя оценка {self.name} {self.surname} равна {mean_score_1}")
+            print(f"Средняя оценка {other.name} {other.surname} равна {mean_score_2}")
+            return False
+        
+    def __ge__(self, other):
+        mean_score_1 = self.mean_score()
+        mean_score_2 = other.mean_score()
+        if mean_score_1 >= mean_score_2:
+            print(True)
+            print(f"Средняя оценка {self.name} {self.surname} равна {mean_score_1}")
+            print(f"Средняя оценка {other.name} {other.surname} равна {mean_score_2}")
+            return True
+        else:
+            print(False)
+            print(f"Средняя оценка {self.name} {self.surname} равна {mean_score_1}")
+            print(f"Средняя оценка {other.name} {other.surname} равна {mean_score_2}")
+            return False
 
+    def __eq__(self, other):
+        mean_score_1 = self.mean_score()
+        mean_score_2 = other.mean_score()
+        if mean_score_1 == mean_score_2:
+            print(True)
+            print(f"Средняя оценка {self.name} {self.surname} равна {mean_score_1}")
+            print(f"Средняя оценка {other.name} {other.surname} равна {mean_score_2}")
+            return True
+        else:
+            print(False)
+            print(f"Средняя оценка {self.name} {self.surname} равна {mean_score_1}")
+            print(f"Средняя оценка {other.name} {other.surname} равна {mean_score_2}")
+            return False     
+
+    def __ne__(self, other):
+        mean_score_1 = self.mean_score()
+        mean_score_2 = other.mean_score()
+        if mean_score_1 != mean_score_2:
+            print(True)
+            print(f"Средняя оценка {self.name} {self.surname} равна {mean_score_1}")
+            print(f"Средняя оценка {other.name} {other.surname} равна {mean_score_2}")
+            return True
+        else:
+            print(False)
+            print(f"Средняя оценка {self.name} {self.surname} равна {mean_score_1}")
+            print(f"Средняя оценка {other.name} {other.surname} равна {mean_score_2}")
+            return False      
+ 
 
 class Mentor:
     def __init__(self, name, surname):
@@ -54,8 +113,12 @@ class Reviewer(Mentor):
         def __str__(self):
             return f"Имя: {self.name}\nФамилия: {self.surname}"
 
+class Course:
+    pass
+
 
 # Create students and their sets of courses
+# Student 1
 best_student = Student('Ruoy', 'Eman', 'your_gender')
 best_student.courses_in_progress += ['Python']
 best_student.courses_in_progress += ['SQL'] 
@@ -65,26 +128,58 @@ best_student.finished_courses += ['GIT']
 print(best_student.courses_in_progress)
 print(best_student.finished_courses)
 
+# Student 2
+best_student_2 = Student('Andrei', 'Pshenichnyi', 'male')
+best_student_2.courses_in_progress += ['Python']
+best_student_2.courses_in_progress += ['SQL'] 
+best_student_2.courses_in_progress += ['Advanced Python']
+best_student_2.finished_courses += ['Physics']
+best_student_2.finished_courses += ['GIT']
+print(best_student_2.courses_in_progress)
+print(best_student_2.finished_courses)
+
 # Create a reviewers and their courses and ratings
 cool_reviewer = Reviewer('Ivan', 'Mulin')
 cool_reviewer.courses_attached += ['Python']
 cool_reviewer.courses_attached += ['SQL']
 cool_reviewer.courses_attached += ['Advanced Python']
+
+# Rate fist student by reviewer
 cool_reviewer.rate_hw(best_student, 'Python', 10)
 cool_reviewer.rate_hw(best_student, 'SQL', 5)
 print(cool_reviewer.courses_attached)
 print(best_student.grades)
 
-# Create a lecturer and her courses and thier raiting
+# Rate second student by reviewer
+cool_reviewer.rate_hw(best_student_2, 'Python', 3)
+cool_reviewer.rate_hw(best_student_2, 'SQL', 8)
+print(cool_reviewer.courses_attached)
+print(best_student_2.grades)
+
+# Create lecturers and their courses and raitings
 best_lecturer = Lecturer('Albert', 'Einstein')
 best_lecturer.courses_attached += ['Physics']
 best_lecturer.courses_attached += ['GIT']
+
+# Rate lecturer by students
 best_student.rate_hw(best_lecturer, 'Physics', 10)
 best_student.rate_hw(best_lecturer, 'GIT', 2)
+best_student_2.rate_hw(best_lecturer, 'Physics', 5)
+best_student_2.rate_hw(best_lecturer, 'GIT', 5)
+
 print(best_lecturer.courses_attached)
 print(best_lecturer.grades)
 
-# Change print func behaviour
+#  Check changed print func behaviour
 print(best_student)
 print(cool_reviewer)
 print(best_lecturer)
+
+# Compare students on average scores
+best_student < best_student_2
+best_student > best_student_2
+best_student == best_student_2
+best_student != best_student_2
+
+# 
+
