@@ -39,8 +39,25 @@ def get_shop_list_by_dishes(dishes, person_count):
                 ingredient_summary[ingredient['ingredient_name']] = ingredient_dict
     return ingredient_summary
 
-ingredients = get_shop_list_by_dishes(['Омлет', 'Омлет'], 2)
-print(ingredients)
+ingredients = get_shop_list_by_dishes(['Омлет', 'Омлет', 'Запеченный картофель'], 2)
+# print(ingredients)
 
+def join_files():
+    """Join text from several files into one file"""
+    with open('1.txt', 'r', encoding='utf-8') as f_1:
+        lines_1 = f_1.readlines()
+        lines_number_1 = len(lines_1)
+        print(lines_number_1)
 
+    with open('2.txt', 'r', encoding='utf-8') as f_2:
+        lines_2 = f_2.readlines()
+        lines_number_2 = len(lines_2)
+        print(lines_number_2)
 
+    with open('3.txt', 'r', encoding='utf-8') as f_3:
+        lines_3 = f_3.readlines()
+        lines_number_3 = len(lines_3)
+        print(lines_number_3)
+
+join_files()
+    
