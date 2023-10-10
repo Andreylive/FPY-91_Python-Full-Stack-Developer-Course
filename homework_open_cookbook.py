@@ -20,6 +20,27 @@ def open_cookbook():
     return cook_book
 
 cook_book = open_cookbook()
-print(cook_book)
+# print(cook_book)
+
+def get_shop_list_by_dishes(dishes, person_count):
+    """Clacalute set of ingredients for ceratiin amount of people"""
+    cook_book = open_cookbook()
+    ingredient_summary = {}
+    for dish in dishes:
+        ingredients = cook_book[dish]
+        for ingredient in ingredients:
+            if ingredient['ingredient_name'] in ingredient_summary:
+                ingredient_summary[ingredient['ingredient_name']]['quantity'] += (int(ingredient['quantity']) * person_count)
+            else:
+                ingredient_dict = {
+                    'measure': ingredient['measure'],
+                    'quantity': int(ingredient['quantity']) * person_count
+                    }
+                ingredient_summary[ingredient['ingredient_name']] = ingredient_dict
+    return ingredient_summary
+
+ingredients = get_shop_list_by_dishes(['Омлет', 'Омлет'], 2)
+print(ingredients)
+
 
 
