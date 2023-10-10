@@ -1,7 +1,9 @@
 cook_book_dict: dict = {}
 
 def add_dish():
-    print()
+    print('Если вы хотите добавить блюдо в кулинарну книгу, напишите наименование и количество ингредиентов')
+    dish_name = input('Введите имя блюда\n')
+    ingredients_number = int(input('Укажите количество ингредиентов в блюде\n'))
     ingredient_list = []
     for i in range(ingredients_number):
         print(f"Чтобы добавить в кулинарную книгу блюдо '{dish_name}' необходимо добавить все ингредиенты, их количества и еденицы измерения")
@@ -13,8 +15,8 @@ def add_dish():
         measure = input('Введите единицу измерения сокращенно (шт., мл., л., кг.) \n')
         ingredient_dict['ingredient_measure'] = measure
         ingredient_list.append(ingredient_dict)
-    cook_book_dict[dish_name] = ingredient_list
-    print(f'кулинарная книга содержит блюда: {cook_book_dict}')
+    cook_book_dict[dish_name] = ingredient_list    
+    return cook_book_dict
 
 add_dish()
 
