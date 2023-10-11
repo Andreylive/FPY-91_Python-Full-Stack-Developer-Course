@@ -1,3 +1,5 @@
+import os
+
 def open_cookbook():
     """Create a cookbook from a file"""
     with open('recipes.txt', 'r', encoding='utf-8') as f:
@@ -44,20 +46,56 @@ ingredients = get_shop_list_by_dishes(['Омлет', 'Омлет', 'Запече
 
 def join_files():
     """Join text from several files into one file"""
-    with open('1.txt', 'r', encoding='utf-8') as f_1:
-        lines_1 = f_1.readlines()
-        lines_number_1 = len(lines_1)
-        print(lines_number_1)
+    text_info = []
 
-    with open('2.txt', 'r', encoding='utf-8') as f_2:
-        lines_2 = f_2.readlines()
-        lines_number_2 = len(lines_2)
-        print(lines_number_2)
+    with open('1.txt', 'r', encoding='utf-8') as f:
+        file_name = '1.txt'
+        lines =  f.readlines()
+        lines_number = len(lines)
+        lines = ''.join(lines)
 
-    with open('3.txt', 'r', encoding='utf-8') as f_3:
-        lines_3 = f_3.readlines()
-        lines_number_3 = len(lines_3)
-        print(lines_number_3)
-
-join_files()
+    text_dict_1 = {
+        'file_name': file_name,
+        'lines_number': lines_number,
+        'text': lines
+        }
     
+    text_info.append(text_dict_1)
+ 
+    with open('2.txt', 'r', encoding='utf-8') as f:
+        file_name = '2.txt'
+        lines = f.readlines()
+        lines_number = len(lines)
+        lines = ''.join(lines)
+
+        text_dict_2 = {
+            'file_name': file_name,
+            'lines_number': lines_number,
+            'text': lines
+        }
+        
+    text_info.append(text_dict_2)
+
+    with open('3.txt', 'r', encoding='utf-8') as f:
+        file_name = '3.txt'
+        lines = f.readlines()
+        lines_number = len(lines)
+        lines = ''.join(lines)
+
+    text_dict_3 = {
+        'file_name': file_name,
+        'lines_number': lines_number,
+        'text': lines
+        }
+    
+    text_info.append(text_dict_3)
+
+    result_file = open("result_file.txt", "w", encoding='utf-8')
+
+    with open('result_file.txt', 'a', encoding='utf-8') as f:
+        for text_dict in text_info:
+            text_dict = text_dict
+            f.write(f" {text_dict['file_name']} \n")
+            f.write(f" {text_dict['lines_number']} \n")
+            f.write(f" {text_dict['text']} \n")
+join_files()
