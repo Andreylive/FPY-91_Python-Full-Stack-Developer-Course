@@ -17,7 +17,7 @@ def read_json(file_path, word_max_len=6, top_words_amt=10):
             if len(word) > word_max_len:
                 words_list_temp.append(word)
         word_list_all += words_list_temp
-                
+
     count_frequency_dict = dict(collections.Counter(word_list_all))
     sorted_frequency_dict = sorted(count_frequency_dict.items(), key=lambda x: x[1], reverse=True)
 
@@ -26,5 +26,6 @@ def read_json(file_path, word_max_len=6, top_words_amt=10):
         most_frequent_word_list.append(element[0])
 
     return most_frequent_word_list
+
 
 read_json("newsafr.json")
