@@ -2,7 +2,6 @@ import json
 import collections
 
 
-
 def read_json(file_path, word_max_len=6, top_words_amt=10):
     with open(file_path, encoding="utf8") as f:
         json_data = json.load(f)
